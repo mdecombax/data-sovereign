@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Sovereign | Conseil Stratégique Data</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bleu-nuit: #0A192F;
+            --blanc-casse: #F8F9FA;
+            --orange-alert: #FF8C00;
+            --argent: #8892B0;
+            --bleu-profond: #112240;
+            --accent-vert: #64FFDA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            background: var(--bleu-nuit);
+            color: var(--blanc-casse);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+        }
+
+        /* Grid animé de fond */
+        .data-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .data-grid::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--accent-vert) 1px, transparent 1px),
+                linear-gradient(90deg, var(--accent-vert) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Particle Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent-vert);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 15s infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(0) translateX(0);
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) translateX(50px);
+            }
+        }
+
+        /* Glow effect on hover */
+        .glow-on-hover {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glow-on-hover::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.4) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            pointer-events: none;
+        }
+
+        .glow-on-hover:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Floating animation for hero elements */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .float-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Shimmer effect */
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .shimmer {
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(100, 255, 218, 0.1) 50%,
+                transparent 100%
+            );
+            background-size: 1000px 100%;
+            animation: shimmer 3s infinite;
+        }
+
+        /* Pulse animation for important elements */
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(255, 140, 0, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 20px rgba(255, 140, 0, 0);
+            }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        /* Tilt effect on cards */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
+
+        .tilt-card:hover {
+            transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) scale(1.02);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+        }
+
+        .logo {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-vert);
+            letter-spacing: -0.02em;
+        }
+
+        .logo a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: clamp(60px, 4vw, 100px);
+            width: auto;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--argent);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-vert), var(--orange-alert));
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-links a:hover::before {
+            width: 150px;
+            height: 150px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-vert);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 100px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(100, 255, 218, 0.05) 0%, transparent 100%);
+            clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(100, 255, 218, 0.1);
+            border: 1px solid var(--accent-vert);
+            border-radius: 50px;
+            color: var(--accent-vert);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both, pulse 2s infinite 2s;
+        }
+
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .hero h1 .highlight {
+            color: var(--accent-vert);
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(90deg, var(--accent-vert), #4FFFDA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .hero h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-vert), transparent);
+            animation: underlineGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes underlineGlow {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--argent);
+            margin-bottom: 3rem;
+            line-height: 1.7;
+            max-width: 700px;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            background: var(--orange-alert);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--orange-alert);
+            animation: fadeInUp 1s ease-out 0.8s both;
+            box-shadow: 0 10px 40px rgba(255, 140, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .cta-primary:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .cta-primary:hover {
+            background: transparent;
+            color: var(--orange-alert);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 140, 0, 0.5);
+        }
+
+        .cta-primary::after {
+            content: '→';
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-primary:hover::after {
+            transform: translateX(8px);
+            animation: arrowBounce 0.6s ease infinite;
+        }
+
+        @keyframes arrowBounce {
+            0%, 100% { transform: translateX(8px); }
+            50% { transform: translateX(12px); }
+        }
+
+        /* Border line animation */
+        .border-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-vert), transparent);
+            animation: borderMove 3s linear infinite;
+        }
+
+        @keyframes borderMove {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Reality Check Section */
+        .reality-check {
+            padding: 10rem 0;
+            position: relative;
+        }
+
+        .reality-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            background: rgba(255, 140, 0, 0.1);
+            border-left: 3px solid var(--orange-alert);
+            color: var(--orange-alert);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .reality-check h2 {
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reality-check h2.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reality-text {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            line-height: 1.8;
+            color: var(--argent);
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reality-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .kill-switch {
+            background: linear-gradient(135deg, var(--bleu-profond) 0%, rgba(17, 34, 64, 0.5) 100%);
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .kill-switch.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .kill-switch::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--orange-alert), transparent);
+            animation: warningLine 2s linear infinite;
+        }
+
+        .kill-switch::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 140, 0, 0.05), transparent);
+            animation: scanline 4s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        @keyframes warningLine {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .switch-visual {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .jurisdiction-box {
+            flex: 1;
+            min-width: 250px;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .us-jurisdiction {
+            background: rgba(255, 140, 0, 0.1);
+            border: 2px solid var(--orange-alert);
+        }
+
+        .eu-sovereignty {
+            background: rgba(100, 255, 218, 0.1);
+            border: 2px solid var(--accent-vert);
+        }
+
+        .jurisdiction-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .jurisdiction-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .jurisdiction-label {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .jurisdiction-status {
+            font-size: 0.9rem;
+            color: var(--argent);
+        }
+
+        /* Comparatif Section */
+        .comparatif {
+            padding: 8rem 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(17, 34, 64, 0.3) 50%, transparent 100%);
+        }
+
+        .comparatif h2 {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        /* Cloud Providers Logos */
+        .cloud-providers {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+            padding: 3rem;
+            background: rgba(17, 34, 64, 0.5);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 140, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cloud-providers::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 140, 0, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .provider-logo {
+            padding: 1.5rem 2.5rem;
+            background: rgba(10, 25, 47, 0.8);
+            border-radius: 12px;
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .provider-logo::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--orange-alert), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 12px;
+            z-index: -1;
+        }
+
+        .provider-logo:hover::before {
+            opacity: 0.3;
+        }
+
+        .provider-logo:hover {
+            transform: translateY(-5px) scale(1.05);
+            border-color: var(--orange-alert);
+            box-shadow: 0 10px 40px rgba(255, 140, 0, 0.3);
+        }
+
+        .provider-logo img {
+            height: 40px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+
+        .provider-logo:hover img {
+            transform: scale(1.02);
+        }
+
+        .providers-label {
+            text-align: center;
+            color: var(--orange-alert);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+        }
+
+        .comparison-table {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--bleu-profond);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .table-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            background: linear-gradient(135deg, rgba(100, 255, 218, 0.1) 0%, transparent 100%);
+            border-bottom: 2px solid rgba(100, 255, 218, 0.3);
+        }
+
+        .table-header > div {
+            padding: 2rem;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .table-row::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .table-row:hover::before {
+            left: 100%;
+        }
+
+        .table-row:hover {
+            background: rgba(100, 255, 218, 0.05);
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(100, 255, 218, 0.1);
+        }
+
+        .table-row > div {
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .table-row .criteria {
+            font-weight: 600;
+            justify-content: flex-start;
+        }
+
+        .icon-risk {
+            color: var(--orange-alert);
+            font-size: 1.5rem;
+        }
+
+        .icon-benefit {
+            color: var(--accent-vert);
+            font-size: 1.5rem;
+        }
+
+        /* Services Cards */
+        .services {
+            padding: 10rem 0;
+        }
+
+        .services h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .services-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--argent);
+            margin-bottom: 5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, var(--bleu-profond) 0%, rgba(17, 34, 64, 0.5) 100%);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 16px;
+            padding: 3rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transform-style: preserve-3d;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-vert), var(--orange-alert));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .service-card:hover::after {
+            opacity: 1;
+            animation: rotate 10s linear infinite;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: perspective(1000px) translateY(-15px) rotateX(2deg);
+            border-color: var(--accent-vert);
+            box-shadow: 0 30px 80px rgba(100, 255, 218, 0.3);
+        }
+
+        .service-number {
+            font-family: 'Crimson Pro', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: rgba(100, 255, 218, 0.2);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1.5rem;
+            color: var(--accent-vert);
+        }
+
+        .service-description {
+            color: var(--argent);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .service-features li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--blanc-casse);
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: var(--accent-vert);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        /* Manifeste Section */
+        .manifeste {
+            padding: 10rem 0;
+            background: linear-gradient(135deg, rgba(100, 255, 218, 0.05) 0%, transparent 100%);
+            position: relative;
+        }
+
+        .manifeste-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .quote-icon {
+            font-size: 5rem;
+            color: rgba(100, 255, 218, 0.3);
+            line-height: 1;
+            margin-bottom: 2rem;
+        }
+
+        .manifeste-text {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            line-height: 1.6;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--blanc-casse);
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+            background: linear-gradient(135deg, var(--blanc-casse) 0%, rgba(100, 255, 218, 0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .manifeste-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .manifeste-author {
+            font-size: 1.1rem;
+            color: var(--argent);
+            font-weight: 600;
+        }
+
+        .manifeste-author::before {
+            content: '—';
+            margin-right: 0.5rem;
+        }
+
+        /* CTA Final Section */
+        .cta-final {
+            padding: 10rem 0;
+        }
+
+        .cta-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--orange-alert) 0%, #FF6B00 100%);
+            border-radius: 20px;
+            padding: 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(255, 140, 0, 0.4);
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cta-box h2 {
+            color: white;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-box p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--bleu-nuit);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.3s ease;
+            background: white;
+            color: var(--bleu-nuit);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--orange-alert);
+            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+        }
+
+        .form-full {
+            grid-column: 1 / -1;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--bleu-nuit);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .submit-btn:hover {
+            background: var(--bleu-profond);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(10, 25, 47, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(100, 255, 218, 0.2);
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--argent);
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--argent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-vert);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .table-header,
+            .table-row {
+                grid-template-columns: 1fr;
+            }
+
+            .table-row > div {
+                border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .switch-visual {
+                flex-direction: column;
+            }
+        }
+
+        /* Scroll Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-vert), var(--orange-alert));
+            z-index: 10000;
+            transform-origin: left;
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Background Grid -->
+    <div class="data-grid"></div>
+
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <a href="#hero" aria-label="Data Sovereign">
+                    <img src="logo.png" alt="Data Sovereign">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#hero">Accueil</a></li>
+                <li><a href="#reality">Analyse</a></li>
+                <li><a href="#comparatif">Comparatif</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-tag">Conseil Stratégique Cloud</span>
+                <h1>
+                    Votre Cloud est-il sous <span class="highlight">juridiction</span>...
+                    <br>ou sous <span class="highlight">protection</span> ?
+                </h1>
+                <p class="hero-subtitle">
+                    Ne laissez pas votre infrastructure dépendre d'un décret à Washington. 
+                    Sécurisez votre souveraineté data avec un conseil d'élite en France.
+                </p>
+                <a href="#contact" class="cta-primary">
+                    Réserver mon Diagnostic de Résilience
+                </a>
+            </div>
+        </div>
+        <div class="border-line"></div>
+    </section>
+
+    <!-- Reality Check Section -->
+    <section class="reality-check" id="reality">
+        <div class="container">
+            <div class="reality-content">
+                <span class="section-tag">Reality Check</span>
+                <h2 class="scroll-reveal">L'illusion de la sécurité</h2>
+                
+                <p class="reality-text scroll-reveal">
+                    <strong>AWS, Azure, GCP :</strong> Même stockées à Paris, vos données répondent au Cloud Act.
+                </p>
+                
+                <p class="reality-text scroll-reveal">
+                    En un clic, une administration étrangère peut suspendre vos accès pour pression 
+                    diplomatique ou guerre commerciale.
+                </p>
+                
+                <div class="kill-switch scroll-reveal">
+                    <h3 style="color: var(--orange-alert); margin-bottom: 2rem; text-align: center;">
+                        ⚠️ Le "Kill Switch" Politique
+                    </h3>
+                    <p style="text-align: center; font-size: 1.1rem; color: var(--argent); margin-bottom: 2rem;">
+                        Votre infrastructure stratégique ne devrait jamais dépendre d'un bouton OFF situé à l'étranger.
+                    </p>
+                    
+                    <div class="switch-visual">
+                        <div class="jurisdiction-box us-jurisdiction">
+                            <div class="jurisdiction-icon">🔓</div>
+                            <div class="jurisdiction-label">Dépendance US</div>
+                            <div class="jurisdiction-status">Juridiction Extraterritoriale</div>
+                        </div>
+                        
+                        <div style="font-size: 3rem; color: var(--argent);">→</div>
+                        
+                        <div class="jurisdiction-box eu-sovereignty">
+                            <div class="jurisdiction-icon">🛡️</div>
+                            <div class="jurisdiction-label">Souveraineté EU</div>
+                            <div class="jurisdiction-status">Protection Garantie</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="reality-text scroll-reveal" style="text-align: center; font-size: 1.2rem; margin-top: 3rem;">
+                    <strong>La vraie question n'est pas "si", mais "quand".</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparatif Section -->
+    <section class="comparatif" id="comparatif">
+        <div class="container">
+            <span class="section-tag" style="display: block; text-align: center; margin-bottom: 2rem;">La Vassalité vs La Liberté</span>
+            <h2>Le choix technique est un choix de souveraineté</h2>
+            
+            <!-- Cloud Providers Logos -->
+            <div class="providers-label">⚠️ Hyperscalers sous juridiction US</div>
+            <div class="cloud-providers">
+                <div class="provider-logo">
+                    <img src="assets/logos/aws.png" alt="AWS">
+                </div>
+                <div class="provider-logo">
+                    <img src="assets/logos/azure.png" alt="Microsoft Azure">
+                </div>
+                <div class="provider-logo">
+                    <img src="assets/logos/gcp.png" alt="Google Cloud">
+                </div>
+            </div>
+            
+            <div class="comparison-table">
+                <div class="table-header">
+                    <div>Critère</div>
+                    <div style="color: var(--orange-alert);">Hyperscalers US</div>
+                    <div style="color: var(--accent-vert);">Approche Souveraine</div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="criteria">Protection Juridique</div>
+                    <div>
+                        <span class="icon-risk">⚠️</span>
+                        <span>Cloud Act applicable</span>
+                    </div>
+                    <div>
+                        <span class="icon-benefit">✓</span>
+                        <span>RGPD strict, droit EU</span>
+                    </div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="criteria">Continuité d'Activité</div>
+                    <div>
+                        <span class="icon-risk">⚠️</span>
+                        <span>Risque géopolitique</span>
+                    </div>
+                    <div>
+                        <span class="icon-benefit">✓</span>
+                        <span>Maîtrise totale</span>
+                    </div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="criteria">Coût de Sortie (Egress)</div>
+                    <div>
+                        <span class="icon-risk">⚠️</span>
+                        <span>Lock-in tarifaire élevé</span>
+                    </div>
+                    <div>
+                        <span class="icon-benefit">✓</span>
+                        <span>Portabilité garantie</span>
+                    </div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="criteria">Conformité Stratégique</div>
+                    <div>
+                        <span class="icon-risk">⚠️</span>
+                        <span>Dépendance externe</span>
+                    </div>
+                    <div>
+                        <span class="icon-benefit">✓</span>
+                        <span>SecNumCloud ANSSI</span>
+                    </div>
+                </div>
+                
+                <div class="table-row">
+                    <div class="criteria">Éthique & Transparence</div>
+                    <div>
+                        <span class="icon-risk">⚠️</span>
+                        <span>Opacité contractuelle</span>
+                    </div>
+                    <div>
+                        <span class="icon-benefit">✓</span>
+                        <span>Transparence totale</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <span class="section-tag" style="display: block; text-align: center; margin-bottom: 2rem;">Notre Approche</span>
+            <h2>Le Pivot de Souveraineté</h2>
+            <p class="services-subtitle">
+                Une transition maîtrisée vers l'autonomie stratégique, sans compromettre l'agilité opérationnelle.
+            </p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-number">01</div>
+                    <h3>Audit de Dépendance</h3>
+                    <p class="service-description">
+                        Cartographie complète de vos vulnérabilités géopolitiques et identification 
+                        des points critiques de votre infrastructure cloud.
+                    </p>
+                    <ul class="service-features">
+                        <li>Analyse de la surface d'exposition juridique</li>
+                        <li>Évaluation des risques de continuité</li>
+                        <li>Mapping des dépendances critiques</li>
+                        <li>Rapport exécutif pour COMEX/CODIR</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-number">02</div>
+                    <h3>Architecture Hybride</h3>
+                    <p class="service-description">
+                        Conception d'une infrastructure qui préserve l'agilité des hyperscalers 
+                        tout en sécurisant vos actifs stratégiques en zone souveraine.
+                    </p>
+                    <ul class="service-features">
+                        <li>Design multi-cloud intelligent</li>
+                        <li>Stratégie de données par criticité</li>
+                        <li>Plan de migration progressive</li>
+                        <li>Réversibilité garantie</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-number">03</div>
+                    <h3>Conformité SecNumCloud</h3>
+                    <p class="service-description">
+                        Accompagnement vers la certification d'excellence de l'ANSSI, 
+                        le standard européen de confiance pour les données sensibles.
+                    </p>
+                    <ul class="service-features">
+                        <li>Gap analysis référentiel ANSSI</li>
+                        <li>Roadmap de mise en conformité</li>
+                        <li>Formation des équipes techniques</li>
+                        <li>Préparation à l'audit de certification</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manifeste Section -->
+    <section class="manifeste">
+        <div class="container">
+            <div class="manifeste-content">
+                <div class="quote-icon">"</div>
+                <p class="manifeste-text scroll-reveal">
+                    Nous croyons qu'une entreprise européenne ne peut pas être leader mondial 
+                    si ses fondations appartiennent à un tiers. La souveraineté n'est pas un repli, 
+                    c'est un tremplin.
+                </p>
+                <p class="manifeste-author">Manifeste Data Sovereign</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final Section -->
+    <section class="cta-final" id="contact">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Ne subissez plus. Reprenez les commandes.</h2>
+                <p>
+                    Obtenez votre diagnostic de résilience cloud gratuit et découvrez 
+                    votre niveau d'exposition aux risques géopolitiques.
+                </p>
+                
+                <div class="form-container">
+                    <form id="contactForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="nom">Nom & Prénom *</label>
+                                <input type="text" id="nom" name="nom" required placeholder="Jean Dupont">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="entreprise">Entreprise *</label>
+                                <input type="text" id="entreprise" name="entreprise" required placeholder="Votre société">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email professionnel *</label>
+                                <input type="email" id="email" name="email" required placeholder="vous@entreprise.fr">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="fournisseur">Fournisseur Cloud Actuel *</label>
+                                <select id="fournisseur" name="fournisseur" required>
+                                    <option value="">Sélectionnez...</option>
+                                    <option value="aws">AWS</option>
+                                    <option value="azure">Microsoft Azure</option>
+                                    <option value="gcp">Google Cloud Platform</option>
+                                    <option value="ovh">OVHcloud</option>
+                                    <option value="scaleway">Scaleway</option>
+                                    <option value="autre">Autre</option>
+                                    <option value="multiple">Multi-cloud</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group form-full">
+                            <label for="message">Votre principal défi cloud (optionnel)</label>
+                            <input type="text" id="message" name="message" placeholder="Ex: Migration, conformité, coûts...">
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            Obtenir mon Diagnostic Gratuit →
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Data Sovereign. Tous droits réservés.</p>
+            <p style="font-size: 0.9rem; margin-top: 1rem;">
+                Conseil stratégique en souveraineté numérique et architecture cloud européenne.
+            </p>
+            <ul class="footer-links">
+                <li><a href="#hero">Mentions légales</a></li>
+                <li><a href="#hero">Politique de confidentialité</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Create Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        createParticles();
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.scroll-reveal');
+        
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = {
+                nom: document.getElementById('nom').value,
+                entreprise: document.getElementById('entreprise').value,
+                email: document.getElementById('email').value,
+                fournisseur: document.getElementById('fournisseur').value,
+                message: document.getElementById('message').value
+            };
+            
+            console.log('Form submitted:', formData);
+            
+            // Show success message
+            alert('Merci ! Nous vous contacterons sous 48h pour votre diagnostic de résilience cloud gratuit.');
+            
+            // Reset form
+            e.target.reset();
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect on scroll
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const delta = scrollTop - lastScrollTop;
+            
+            // Parallax for hero background
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                const heroRect = hero.getBoundingClientRect();
+                if (heroRect.top < window.innerHeight && heroRect.bottom > 0) {
+                    hero.style.transform = `translateY(${scrollTop * 0.3}px)`;
+                }
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+
+        // Add magnetic effect to CTA buttons
+        document.querySelectorAll('.cta-primary').forEach(button => {
+            button.addEventListener('mousemove', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                button.style.transform = `translateY(-5px) scale(1.05) translate(${x * 0.1}px, ${y * 0.1}px)`;
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = '';
+            });
+        });
+
+        // 3D tilt effect on service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                card.style.transform = `perspective(1000px) translateY(-15px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>
