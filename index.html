@@ -234,7 +234,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 2rem;
+            padding: 1rem 2rem;
         }
 
         .logo {
@@ -322,7 +322,7 @@
             align-items: center;
             position: relative;
             overflow: hidden;
-            padding-top: 100px;
+            padding-top: 160px;
         }
 
         .hero::before {
@@ -718,10 +718,13 @@
             height: 40px;
             width: auto;
             transition: all 0.3s ease;
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
         }
 
         .provider-logo:hover img {
             transform: scale(1.02);
+            opacity: 1;
         }
 
         .providers-label {
