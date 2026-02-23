@@ -23,7 +23,7 @@ export default async function handler(req, res) {
   // Configuration via variables d'environnement Vercel
   const BREVO_API_KEY = process.env.BREVO_API_KEY;
   // L'expéditeur DOIT être une adresse validée dans le dashboard Brevo
-  const SENDER_EMAIL = process.env.SENDER_EMAIL || 'Martin.decombarieu@gmail.com';
+  const SENDER_EMAIL = process.env.SENDER_EMAIL || 'service@sovereign-data.eu';
   const SENDER_NAME = process.env.SENDER_NAME || 'Data Sovereign Formulaire';
 
   if (!BREVO_API_KEY) {
