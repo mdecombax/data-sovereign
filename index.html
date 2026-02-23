@@ -1687,8 +1687,11 @@
         revealOnScroll(); // Initial check
 
         // Form Submission
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
             e.preventDefault();
+            const form = e.target;
+            const submitBtn = form.querySelector('.submit-btn');
+            const originalBtnText = submitBtn.innerText;
             
             // Collect form data
             const formData = {
@@ -1699,13 +1702,39 @@
                 message: document.getElementById('message').value
             };
             
-            console.log('Form submitted:', formData);
+            // UI Loading State
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Envoi en cours...';
+            submitBtn.style.opacity = '0.7';
+            submitBtn.style.cursor = 'not-allowed';
             
-            // Show success message
-            alert('Merci ! Nous vous contacterons sous 48h pour votre diagnostic de résilience cloud gratuit.');
-            
-            // Reset form
-            e.target.reset();
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                if (response.ok) {
+                    // Show success message
+                    alert('Merci ! Votre message a bien été envoyé. Nous vous contacterons sous 48h.');
+                    form.reset();
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Erreur lors de l\'envoi');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Désolé, une erreur est survenue : ' + error.message + '. Veuillez réessayer ou nous contacter directement.');
+            } finally {
+                // Restore button state
+                submitBtn.disabled = false;
+                submitBtn.innerText = originalBtnText;
+                submitBtn.style.opacity = '1';
+                submitBtn.style.cursor = 'pointer';
+            }
         });
 
         // Smooth scroll for anchor links
