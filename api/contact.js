@@ -20,12 +20,15 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Champs obligatoires manquants (Nom, Entreprise, Email, Fournisseur)' });
   }
 
-  // Utilisation sécurisée de la clé via les variables d'environnement Vercel
+  // Configuration via variables d'environnement Vercel
   const BREVO_API_KEY = process.env.BREVO_API_KEY;
+  // L'expéditeur DOIT être une adresse validée dans le dashboard Brevo
+  const SENDER_EMAIL = process.env.SENDER_EMAIL || 'Martin.decombarieu@gmail.com';
+  const SENDER_NAME = process.env.SENDER_NAME || 'Data Sovereign Formulaire';
 
   if (!BREVO_API_KEY) {
     console.error('Erreur : La variable d\'environnement BREVO_API_KEY n\'est pas configurée.');
-    return res.status(500).json({ error: 'Configuration serveur manquante (Variable BREVO_API_KEY non trouvée sur Vercel)' });
+    return res.status(500).json({ error: 'Configuration serveur manquante (Clé API)' });
   }
 
   try {
@@ -37,7 +40,7 @@ export default async function handler(req, res) {
         'content-type': 'application/json'
       },
       body: JSON.stringify({
-        sender: { name: 'Data Sovereign Formulaire', email: 'Martin.decombarieu@gmail.com' },
+        sender: { name: SENDER_NAME, email: SENDER_EMAIL },
         to: [{ email: 'Martin.decombarieu@gmail.com', name: 'Martin de Combarieu' }],
         replyTo: { email: email, name: nom },
         subject: `🚀 Nouveau Contact : ${escapeHtml(entreprise)}`,
@@ -73,9 +76,12 @@ export default async function handler(req, res) {
       return res.status(200).json({ message: 'Email envoyé avec succès' });
     } else {
       console.error('Erreur Brevo détaillée:', JSON.stringify(data));
-      // Si l'erreur est "API Key is not enabled", on le remonte clairement
       if (data.code === 'unauthorized') {
-        return res.status(401).json({ error: 'La clé API Brevo n\'est pas activée ou est invalide. Veuillez vérifier votre compte Brevo.' });
+        return res.status(401).json({ error: 'La clé API Brevo n\'est pas activée ou est invalide.' });
+      }
+      // Message spécifique pour l'expéditeur non validé
+      if (data.code === 'invalid_parameter' && data.message.includes('sender')) {
+        return res.status(400).json({ error: `L'adresse expéditeur (${SENDER_EMAIL}) n'est pas validée dans votre compte Brevo.` });
       }
       return res.status(response.status).json({ error: data.message || 'Échec de l\'envoi via Brevo' });
     }
