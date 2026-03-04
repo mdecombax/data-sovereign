@@ -934,6 +934,107 @@
             font-size: 1.2rem;
         }
 
+        /* Technical Reassurance Section */
+        .tech-reassurance {
+            padding: 8rem 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(100, 255, 218, 0.03) 50%, transparent 100%);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .tech-item {
+            padding: 2.5rem;
+            background: rgba(17, 34, 64, 0.4);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            border-color: var(--accent-vert);
+            transform: translateY(-5px);
+            background: rgba(17, 34, 64, 0.6);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .tech-item h4 {
+            color: var(--accent-vert);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .tech-item p {
+            color: var(--argent);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .section-tag-center {
+            display: block;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .kill-switch-title {
+            color: var(--orange-alert);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .kill-switch-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--argent);
+            margin-bottom: 2rem;
+        }
+
+        .switch-arrow {
+            font-size: 3rem;
+            color: var(--argent);
+        }
+
+        .reality-text-highlight {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 3rem;
+        }
+
+        .table-header-us {
+            color: var(--orange-alert);
+        }
+
+        .table-header-eu {
+            color: var(--accent-vert);
+        }
+
+        .tech-reassurance-subtitle {
+            text-align: center;
+            color: var(--argent);
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .footer-description {
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
         /* Manifeste Section */
         .manifeste {
             padding: 10rem 0;
@@ -1349,8 +1450,7 @@
                     <br>ou sous <span class="highlight">protection européenne</span> ?
                 </h1>
                 <p class="hero-subtitle">
-                    Dans le contexte actuel de Washington, l'imprévisibilité de l'administration devient un risque critique.
-                    Ne laissez plus votre infrastructure dépendre d'une fermeture arbitraire ordonnée depuis le Bureau Ovale.
+                    Sécurisez vos opérations sans sacrifier la performance. Alliez la résilience face à l'imprévisibilité de Washington à une infrastructure optimisée pour des temps d'exécution minimaux et un impact serveur maîtrisé.
                 </p>
                 <a href="#contact" class="cta-primary">
                     Réserver mon Diagnostic de Résilience
@@ -1377,10 +1477,10 @@
                 </p>
                 
                 <div class="kill-switch scroll-reveal">
-                    <h3 style="color: var(--orange-alert); margin-bottom: 2rem; text-align: center;">
+                    <h3 class="kill-switch-title">
                         ⚠️ Le "Kill Switch" de Donald Trump
                     </h3>
-                    <p style="text-align: center; font-size: 1.1rem; color: var(--argent); margin-bottom: 2rem;">
+                    <p class="kill-switch-subtitle">
                         Votre infrastructure stratégique ne devrait jamais dépendre d'une signature arbitraire à Washington.
                     </p>
                     
@@ -1391,7 +1491,7 @@
                             <div class="jurisdiction-status">Arbitraire Extraterritorial</div>
                         </div>
                         
-                        <div class="switch-arrow" style="font-size: 3rem; color: var(--argent);">→</div>
+                        <div class="switch-arrow">→</div>
                         
                         <div class="jurisdiction-box eu-sovereignty">
                             <div class="jurisdiction-icon">🛡️</div>
@@ -1401,7 +1501,7 @@
                     </div>
                 </div>
                 
-                <p class="reality-text scroll-reveal" style="text-align: center; font-size: 1.2rem; margin-top: 3rem;">
+                <p class="reality-text scroll-reveal reality-text-highlight">
                     <strong>La vraie question n'est pas "si", mais "quand".</strong>
                 </p>
             </div>
@@ -1411,7 +1511,7 @@
     <!-- Comparatif Section -->
     <section class="comparatif" id="comparatif">
         <div class="container">
-            <span class="section-tag" style="display: block; text-align: center; margin-bottom: 2rem;">La Vassalité vs La Liberté</span>
+            <span class="section-tag section-tag-center">La Vassalité vs La Liberté</span>
             <h2>Le choix technique est une arme de souveraineté</h2>
             
             <!-- Cloud Providers Logos -->
@@ -1431,8 +1531,8 @@
             <div class="comparison-table">
                 <div class="table-header">
                     <div>Critère</div>
-                    <div style="color: var(--orange-alert);">Hyperscalers US (Trump)</div>
-                    <div style="color: var(--accent-vert);">Approche Souveraine</div>
+                    <div class="table-header-us">Hyperscalers US (Trump)</div>
+                    <div class="table-header-eu">Approche Souveraine</div>
                 </div>
                 
                 <div class="table-row">
@@ -1494,6 +1594,18 @@
                         <span>Transparence totale</span>
                     </div>
                 </div>
+
+                <div class="table-row">
+                    <div class="criteria">Performance & Latence</div>
+                    <div>
+                        <span class="icon-risk">⚠️</span>
+                        <span>Overhead extraterritorial</span>
+                    </div>
+                    <div>
+                        <span class="icon-benefit">✓</span>
+                        <span>Exécution locale optimisée</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1501,7 +1613,7 @@
     <!-- Services Section -->
     <section class="services" id="services">
         <div class="container">
-            <span class="section-tag" style="display: block; text-align: center; margin-bottom: 2rem;">Notre Approche</span>
+            <span class="section-tag section-tag-center">Notre Approche</span>
             <h2>Le Pivot de Souveraineté</h2>
             <p class="services-subtitle">
                 Une transition maîtrisée vers l'autonomie stratégique, sans compromettre l'agilité opérationnelle.
@@ -1519,6 +1631,7 @@
                         <li>Analyse de l'exposition aux décrets Trump</li>
                         <li>Évaluation des risques de coupure immédiate</li>
                         <li>Mapping des dépendances critiques</li>
+                        <li>Analyse des impacts de latence et d'exécution</li>
                         <li>Rapport exécutif pour COMEX/CODIR</li>
                     </ul>
                 </div>
@@ -1533,6 +1646,7 @@
                     <ul class="service-features">
                         <li>Design multi-cloud intelligent</li>
                         <li>Stratégie de données par criticité</li>
+                        <li>Optimisation de l'empreinte serveur</li>
                         <li>Plan de migration progressive</li>
                         <li>Réversibilité garantie</li>
                     </ul>
@@ -1551,6 +1665,37 @@
                         <li>Formation des équipes techniques</li>
                         <li>Préparation à l'audit de certification</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Reassurance Section -->
+    <section class="tech-reassurance">
+        <div class="container">
+            <span class="section-tag section-tag-center">Ingénierie de Confiance</span>
+            <h2 class="text-center">L'excellence technique comme bouclier</h2>
+            <p class="tech-reassurance-subtitle">
+                Nous ne faisons pas que de la souveraineté, nous faisons de la haute performance. Pour les CTO et RSSI qui ne transigent pas sur la qualité de service.
+            </p>
+
+            <div class="tech-grid">
+                <div class="tech-item scroll-reveal">
+                    <span class="tech-icon">⚡</span>
+                    <h4>Zéro Latence Administrative</h4>
+                    <p>Finies les couches d'abstraction imposées par des politiques de conformité extraterritoriales. Accédez à la puissance brute en circuit court.</p>
+                </div>
+
+                <div class="tech-item scroll-reveal">
+                    <span class="tech-icon">🏗️</span>
+                    <h4>Stacks Battle-Tested</h4>
+                    <p>Utilisation de technologies open-source éprouvées et d'infrastructures certifiées SecNumCloud pour une stabilité opérationnelle sans faille.</p>
+                </div>
+
+                <div class="tech-item scroll-reveal">
+                    <span class="tech-icon">🛡️</span>
+                    <h4>Contrôle Infra Total</h4>
+                    <p>Maîtrise complète de la stack, du hardware à l'application. Une visibilité totale pour vos audits RSSI et une remédiation instantanée.</p>
                 </div>
             </div>
         </div>
@@ -1632,7 +1777,7 @@
     <footer>
         <div class="container">
             <p>&copy; 2026 Data Sovereign. Tous droits réservés.</p>
-            <p style="font-size: 0.9rem; margin-top: 1rem;">
+            <p class="footer-description">
                 Conseil stratégique en souveraineté numérique et architecture cloud européenne.
             </p>
             <ul class="footer-links">
